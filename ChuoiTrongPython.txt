@@ -1,0 +1,318 @@
+- Chuỗi trần sẽ bỏ qua hết Escape Sequence. r'nội dung chuỗi' r=Regular Expression
++ VD: a = r’\neu mot ngay’
+- Toán tử với chuỗi:
++ A +B (với A và B là chuỗi),A * N ( Với A là một chuỗi, N là một số nguyên)
++ s in A (Với s và A là chuỗi),
++ A <toán tử so sánh> B (A và B là 2 chuỗi) : <, >, ==, !=, <=, >=,.... Python sẽ so sánh vị trí của chúng trong bảng mã Unicode
++ Để xem vị trí của một kí tự trong bảng mã Unicode, ta sử dụng hàm ord() :ord(<kí tự>)
+
+- Indexing: chuỗi được đánh số từ 0 tới n – 1 từ trái > phải và
+           từ -1 đến -n theo chiều từ phải sang trái, với n :số kí tự có trong chuỗi.VD Lấy kí tự :<chuỗi>[vị trí]
+
+- Cắt chuỗi từ trái qua phải : <chuỗi>[vị trí bắt đầu : vị trí dừng] 
++ (lấy) từng các kí tự có vị trí từ <vị trí bắt đầu> đến <vị trí dừng> - 1 và từ trái sang phải.
++ VD:>>> s = ‘abc xyz’
+>>> s[1:5]  # cắt từng kí tự có vị trí từ 1 đến 4
+‘bc x’
+>>> s[0:3]  # cắt từng kí tự có vị trí từ 0 đến 2
+‘abc’
+>>> s[-4: -1]  # cắt từng kí tự có vị trí từ -4 đến -2
+‘ xy’
+>>> s[1: -1]  # cắt từng kí tự có vị trí từ 1(-6) đến 5(-2) vì vị trí dừng là 6(-1)
+‘bc xy’
++ Dùng none để cắt chuỗi:
+>>> s[1:None]  # lấy các kí tự có vị trí 1 đến hết chuỗi
+‘bc xyz’
+>>> s[3:None] # lấy các kí tự có vị trí 3 đến hết chuỗi
+‘ xyz’
+>>> s[1:]  # đặc biệt, ta chỉ cần bỏ trống, Python sẽ tự hiểu là None
+‘bc xyz’
+>>> s[-3:]
+‘xyz’
+>>> s[None: 4]  # lấy các kí tự có vị trí từ 0 đến 3
+‘abc ‘
+>>> s[:-1]  # ta cũng có thể để trống, Python sẽ tự hiểu là None
+‘abc xy’
+>>> s[:]  # một cách sao chép chuỗi
+‘abc xyz’
+
+- Cắt chuỗi từ phải qua trái : <chuỗi>[vị trí bắt đầu : vị trí dừng: Bước] Mặc định bước là 1 Không được đặt bước =0
+>>> s = ‘abc xyz’
+>>> s[1: 7: 2]  #  bước là 2
+‘b y’
+>>> s[3:1:-1]  # bắt đầu ở 3 và dừng ở 1. Các vị trí lấy là 3, 2
+‘ c’
+>>> s[4::-1] # lấy các kí tự có vị trí từ 4 đến 0
+‘x cba’
+>>> s[::-1]  # một cách lấy chuỗi ngược nhờ có bước âm.
+‘zyx cba’
++ Ngoài ra, nếu <vị trí bắt đầu> hoặc <vị trí dừng> là một giá trị vượt ngoài phạm vi của chuỗi,
+ thì python cũng sẽ cho chúng ta cắt chuỗi một cách tối ưu nhất:
+>>> a = '123456'
+>>> a[1: 100] // lấy từ kí tự a[0] đến cuối chuỗi
+'23456'
+>>> a[-1000: 1000] // lấy toàn bộ chuỗi
+'123456'
+>>> a[-10:-3] // lấy từ a[-6] đến a[-4]
+'123'
+
+-Thay đổi nội dung chuỗi:
++ Không thể thay đổi bằng Indexing được :
+>>> s = ‘abc xyz’
+>>> s[0]
+‘a’
+>>> s[0] = ‘k’
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'str' object does not support item assignment
++ Thay đổi bằng cách gián tiếp :
+>>> s = ‘abc xyz’
+>>> s = ‘k’ + s[1:]  # lấy các kí tự từ vị trí 1 đến hết chuỗi
+>>> s
+‘kbc xyz’
++ Vì ta không thể thay thế nội dung chuỗi, do đó kiểu dữ liệu chuỗi là một đối tượng có thể băm (hashable object).
+Vì nó là một hashable object. Nên ta có thể sử dụng hàm hash.
+
+- Định dang chuỗi trong Python:
++ Định dạng bằng toán tử % :Đây là kiểu dữ liệu tuple
+%s : Mọi kiểu luôn ,%d :Số nguyên,%f :Số thực,%r :hơi giống %s
+>>> s = ‘%s %s’
+>>> s %(‘one’, ‘two’)
+‘one two’
+>>> s %(‘D’)  # không được, vì trong chuỗi của biến d có dư kí hiệu % để thay thế
+
++ Định dạng bằng chuỗi f (f-string):
+f ’giá trị trong chuỗi’ , ngoặc nhọn tên biến
+VD:Có chuỗi 1: {one}, 2: {two}, 3: {variable}
+>>> variable = ‘three’
+>>> f‘1: {{one}}, 2: {{two}}, 3: {variable}’
+‘1: {one}, 2: {two}, 3: three’
+Ở one và two lồng 2 ngoặc nhọn giống Escape Sequence sẽ bỏ qua ko thay vào nữa
+
++ Định dạng bằng phương thức format: tối ưu hơn %
+>>> ‘a: {1}, b: {2}, c: {0}’.format(‘one’, ‘two’, ‘three’)
+‘a: two, b: three, c: one‘
+Có thể cho dư giá trị:
+>>> ‘only one value: {0}’.format(1, 2)
+‘only one value: 1’
+>>> ‘only one value: {1}’.format(1, 2)
+‘only one value: 2’
+>>> ‘two same value: {0}, {0}’.format(1, 2) # và cũng có thể lặp lại
+‘two same value: 1, 1’
++ Chi tiết hơn :
+>>> ‘1: {one}, 2: {two}’.format(one=111, two=222)
+‘1: 111, 2: 222’
++ Căn lề :
+>>> ‘{:^10}’.format(‘aaaa’)  # căn giữa
+'   aaaa   '
+>>> '{:<10}'.format('aaaa') # căn lề trái
+'aaaa      '
+>>> '{:>10}'.format('aaaa') # căn lề phải
+'      aaaa'
+>>> '{:*>10}'.format('aaaa') # căn lề trái, thay thế khoảng trắng bằng kí tự *
+'******aaaa'
+>>> '{:*<10}'.format('aaaa') # căn lề phải, thay thế khoảng trắng bằng kí tự *
+'aaaa******'
+>>> '{:*^10}'.format('aaaa') # căn giữa, thay thế khoảng trắng bằng kí tự *
+'***aaaa***'
+
+- Các phương thức xử lí chuôi:
+>>> k = ‘12’
+>>> int(k)
+12
+>>> type(k)  # k vẫn thuộc lớp str
+<class ‘str’>
+---> Các phương thức Đều có giá trị trả về không ảnh hưởng chuỗi ban đầu 
+
+Các Phương thức biến đổi:
++ <chuỗi>.capitalize()
+Công dụng: Trả về một chuỗi với kí tự đầu tiên được viết hoa và viết thường tất cả những kí tự còn lại.
++ <chuỗi>.upper()
+Công dụng: Trả về một chuỗi với tất cả các kí tự được chuyển thành các kí tự viết hoa
++ <chuỗi>.lower()
+Công dụng: Trả về một chuỗi với tất cả các kí tự được chuyển thành các kí tự viết thường
++ <chuỗi>.swapcase()
+Công dụng: Trả về một chuỗi với các kí tự viết hoa được chuyển thành viết thường, các kí tự viết thường được chuyển thành viết hoa
++ <chuỗi>.title()
+Công dụng: Trả về một chuỗi với định dạng tiêu đề, có nghĩa là các từ sẽ được viết hoa chữ cái đầu tiên, còn lại là viết thường
+
+Các Phương thức định dạng:
++ <chuỗi>.center(width, [fillchar])
+Công dụng: Trả về một chuỗi được căn giữa với chiều rộng width(tổng cả phần căn).
+Nếu fillchar là None (không được nhập vào) thì sẽ dùng kí tự khoảng trắng để căn, không thì sẽ căn bằng kí tự fillchar.
+Một điều nữa là kí tự fillchar là một chuỗi có độ dài là 1.
++ <chuỗi>.rjust(width, [fillchar])
+Công dụng: Cách hoạt động tương tự như phương thức center, có điều là căn lề phải
++ <chuỗi>.ljust(width, [fillchar])
+Công dụng: Cách hoạt động tương tự phương thức center, nhưng căn lề trái.
+
+Các Phương thức xử lí:
++ <chuỗi>.encode(encoding=’utf-8’, errors=’strict’)
+Công dụng: Đây là phương thức dùng để encode(Mã hoá) một chuỗi với phương thức mã hóa mặc định là utf-8.
+Một số giá trị ngoài strict là ignore, replace, xmlcharrefreplace
+VD: >>> 'ố ồ'.encode()
+b'\xe1\xbb\x91 \xe1\xbb\x93'
+
++ <chuỗi (đã mã hóa)>.decode(encoding=’utf-8’, errors=’strict’)
+Công dụng: dùng để giải mã các kí tự đã được mã hóa bởi phương thức encode.
+
++<kí tự nối>.join(<iterable>)
+Công dụng: Trả về một chuỗi bằng cách nối các phần tử trong iterable bằng kí tự nối. 
+Một iterable có thể là một tuple, list,… hoặc là một iterator 
+Một điểm lưu ý, các phần tử trong iterable buộc phải thuộc lớp str
+VD:>>> ' '.join(['1', '2', '3']) # iterable ở đây là list ['1', '2', '3']
+'1 2 3'
+>>> ' '.join(('1', '2', '3')) # iterable ở đây là tuple ('1', '2', '3')
+'1 2 3'
+
++ <chuỗi>.replace(old, new, [count])
+Công dụng: Trả về một chuỗi với các chuỗi old nằm trong chuỗi ban đầu được thay thế bằng chuỗi new.
+Nếu count khác None (có nghĩa là ta cho thêm count) thì ta sẽ thay thế old bằng new với số lượng count từ trái qua phải.
+Nếu chuỗi old không nằm trong chuỗi ban đầu hoặc count là 0 thì sẽ trả về một chuỗi giống với chuỗi ban đầu
+VD:>>> 'abc how abc kteam'.replace('abc', 'aaa')
+'aaa how aaa kteam'
+>>> 'abc how abc kteam'.replace('abc', 'AA', 1)
+'AA how abc kteam'
+>>> 'abc how abc kteam'.replace('abc', 'BB', 0)
+'abc how abc kteam'
+
++ <chuỗi>.strip([chars])
+Công dụng: Trả về một chuỗi với phần đầu và phần đuôi của chuỗi được bỏ đi các kí tự chars.
+Nếu chars bị bỏ trống thì mặc định các kí tự bị bỏ đi là dấu khoảng trắng và các escape sequence. 
+Một số escape sequence ngoại lệ như \a sẽ được encode utf-8. Tuy vậy, không có ảnh hưởng gì tới nội dung.
+VD:>>> '  Kter   '.strip()
+'Kter'
+>>> '%%%%Kter%%%'.strip('%')
+'Kter'
+>>> 'cababHowbaaaca'.strip('abc')
+'How'
+>>> '\t\n\aKter\a\a\n\v'.strip() # các \a biến thành \x07
+'\x07Kter\x07\x07'
++ <chuỗi>.rstrip()
+Công dụng: Cách hoạt động hoàn toàn như phương thức strip, nhưng khác là chỉ bỏ đi ở phần đuôi (từ phải sang trái)
++ <chuỗi>.lstrip()
+Công dụng: Cách hoạt động tương tự phương thức rstrip, khác ở chỗ rstrip lo phần đuôi, còn lstrip lo phần đầu (từ trái sang phải)
+
++<chuỗi>.removeprefix([prefix])
+Công dụng: Trả về một chuỗi mới, chính là chuỗi ban đầu với phần đầu đã được bỏ đi [prefix]
+Nếu [prefix] không xuất hiện ở phần đầu của chuỗi, phương thức removeprefix trả về chính chuỗi đó.
+VD:>>> s = 'tttvttt'
+>>> s.removeprefix('t') # Bỏ kí tự ‘t’ ở đầu
+'ttvttt'
+>>> s.removeprefix('tt') # Bỏ cụm từ ‘tt’ ở đầu
+'tvttt'
+>>> s.removeprefix('Kter') # Trả về chuỗi ban đầu
+'tttvttt'
+
++ <chuỗi>.removesuffix([suffix])
+Công dụng: tương tự như removeprefix, nhưng nó sẽ xóa ở cuối chuỗi.
+Ví dụ:>>> s = 'tttvttt'
+>>> s.removesuffix('t')
+'tttvtt'
+>>> s.removesuffix('vttt')
+'ttt'
+>>> s.removesuffix('vtt')
+'tttvttt'
+
+Các phương thức tách chuỗi:
++ <chuỗi>.split(sep=None, maxsplit=-1)
+Công dụng: Trả về một list (kiểu dữ liệu sẽ được Kteam giới thiệu ở bài KIỂU DỮ LIỆU LIST) bằng cách chia các phần tử bằng kí tự sep.
+Nếu sep mặc định bằng None thì sẽ dùng kí tự khoảng trắng.
+Nếu maxsplit được mặc định bằng -1,
+Python sẽ không bị giới hạn việc tách, còn không, Python sẽ tách với số lần được cung cấp thông qua maxsplit.
+VD:>>> 'How Kteam K9'.split(maxsplit=1)
+['How', 'Kteam K9']
+
++ rsplit giống split nhưng tách từ phải sang:
+VD:>>> 'How kteam EDUCATION'.rsplit()
+['How', 'kteam', 'EDUCATION']
+>>> 'How kteam EDUCATION'.rsplit(maxsplit=1)
+['How kteam', 'EDUCATION']
+
++ <chuỗi>.splitlines(keppends=False)
+Công dụng: hoàn toàn giống với phương thức split, nhưng các phần tử được chia tách bằng “\n” (xuống dòng). 
+Nếu keppends được cung cấp giá trị True, các phần tử khi được phân tách cũng sẽ có kí tự “\n” theo sau.
+
++ <chuỗi>.partition(sep)
+Công dụng: Trả về một tuple với 3 phần tử. Các phần tử đó lần lượt là chuỗi trước chuỗi sep, sep và  chuỗi sau sep.
+Trong trường hợp không tìm thấy sep trong chuỗi, mặc định trả về giá trị đầu tiên là chuỗi ban đầu và 2 giá trị kế tiếp là chuỗi rỗng.
+VD:>>> 'How kteam vs I hate python team vs Education'.partition('vs')
+('How kteam ', 'vs', ' I hate python team vs Education')
+>>> 'How kteam vs I hate python team vs Education'.partition('VS')
+('How kteam vs I hate python team vs Education', '', '')
+
++ <chuỗi>.rpartition(sep)
+VD: 'How kteam vs I hate python team vs free Education'.rpartition('VS')
+('', '', 'How kteam vs I hate python team vs free Education')
+
+Phương thức tiện ích:
++ <chuỗi>.count(sub, [start, [end]])
+Công dụng: Trả về một số nguyên, chính là số lần xuất hiện của sub trong chuỗi.
+ Còn start và end là số kĩ thuật slicing (lưu ý không hề có bước).
+VD:>>> 'kkkkk'.count('k')
+5
+>>> 'kkkkk'.count('k', 3, 4)
+1
+
++ <chuỗi>.startswith(prefix[, start[, end]])
+Công dụng: Trả về  giá trị True nếu chuỗi đó bắt đầu bằng chuỗi prefix. Ngược lại là False.
+Hai yếu tố start, end tượng trưng cho việc slicing (không có bước) để kiểm tra với chuỗi slicing đó.
+
++ <chuỗi>.endswith(prefix[, start[, end]])
+Công dụng: Trả về  giá trị True nếu chuỗi đó kết thúc bằng chuỗi prefix. Ngược lại là False.
+
++ <chuỗi>.find(sub[, start[, end]])
+Công dụng: Trả về một số nguyên, là vị trí đầu tiên của sub khi dò từ trái sang phải trong chuỗi. 
+Nếu sub không có trong chuỗi, kết quả sẽ là -1.
+Vẫn như các phương thức khác, start end đại diện cho slicing và ta sẽ tìm trong chuỗi slicing này.
+VD:>>> 'howkteam'.find('h')
+0
+
++ <chuỗi>.rfind(sub[, start[, end]])
+Công dụng: Tương tự phương thức find nhưng tìm từ phải sang trái
+VD:>>> 'howkteamhow'.rfind('h')
+8
+
++ <chuỗi>.index(sub[, start[, end]])
+Công dụng: Tương tự phương thức find. Nhưng khác biệt là sẽ có lỗi ValueError nếu không tìm thấy chuỗi sub trong chuỗi ban đầu
+VD:>>> 'abcd'.index('z')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ValueError: substring not found
+
++ <chuỗi>.rindex(sub[, start[, end]])
+Công dụng: Tương tự phương thức rindex. Và cũng khác ở điểm là sẽ có ValueError nếu không tìm thấy chuỗi sub trong chuỗi ban đầu
+
+Các phương thức xác thực:
++ <chuỗi>.islower()
+Công dụng: Trả về True nếu tất cả các kí tự trong chuỗi đều là viết thường. Ngược lại là False
+
++ <chuỗi>.isupper()
+Công dụng: Trả về True nếu tất cả các kí tự trong chuỗi đều là viết hoa. Ngược lại là False
+
++ <chuỗi>.istitle()
+Công dụng: Trả về True nếu chuỗi đó là một dạng title. Ngược lại là False
+
++chuỗi>.isidentifier()
+Công dụng:  Giúp xác định xem một chuỗi có phải là một định danh hay không.
+Phương thức isidentifier trả về True khi cả ba điều kiện sau được thỏa mãn:
+Chuỗi phải được bắt đầu bằng dấu gạch dưới (_) hoặc các kí tự chữ cái
+Chuỗi không được chứa bất kì khoảng trắng nào
+Không được chứa các kí tự đặc biệt (_, %, $, _...) ngoại trừ việc kí tự đầu tiên có thể là dấu gạch dưới.
+
++ <chuỗi>.isdigit()
+Công dụng: Trả về True nếu tất cả các kí tự trong chuỗi đều là những con số từ 0 đến 9
+VD:>>> '0123'.isdigit()
+True
+>>> '-123'.isdigit()
+False
+
++ <chuỗi>.isspace()
+Công dụng: Trả về True nếu tất cả các kí tự trong chuỗi đều là kí tự khoảng trắng
+
++import keyword
+keyword.iskeyword(<chuỗi>)
+Công dụng: Trả về True nếu chuỗi đó tương ứng với một từ khóa.
+VD: >>> import keyword # Khai báo thư viện keyword
+>>> keyword.iskeyword('def')
+True

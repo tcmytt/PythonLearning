@@ -1,0 +1,134 @@
+- Chứa trong [], chứa mọi đối tượng(cả chính nó).
+>>> lst = [1,2,5,"kteam"]
+
+- List Comprehension:
+>>> a = [kteam for kteam in range(3)]
+[0, 1, 2]
+>>> another_lst = [[n, n * 1, n * 2] for n in range(1, 4)]
+[[1, 1, 2], [2, 2, 4], [3, 3, 6]]
+
+- Constructor List:
+     list (iterable):iterable đó chính là chuỗi, và List.
+>>> lst = list([1, 2, 3])
+[1, 2, 3]
+>>> str_lst = list('HOWKTEAM')
+['H', 'O', 'W', 'K', 'T', 'E', 'A', 'M']
+>>> list(1)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'int' object is not iterable
+
+- Toán tử:+ , * , in , A <toán tử so sánh> B (A và B là 2 list)
+VD:
+>>> 'a' in ['a', 2, 3]
+True
+>>> 'a' in [['a'], 'b', 'c'] # chỉ có ['a'] thôi, không có 'a'
+False
+
+- Indexing và cắt List trong Python:
++ Giống chuỗi
+
+- Thay đổi nội dung List trong Python:
+Khác với chuỗi cần cắt ra rồi ghép lại thì list không cần mà có thể thay đổi lại luôn từ Indexing
+
+- Ma trận(list trong list)
+>>> lst = [[1, 2, 3], [4, 5, 6]]
+>>> lst[1][1]
+5
+
+- Vấn đề cần lưu tâm khi sử dụng List
+Không được phép gán List này qua List kia nếu không có chủ đích
+Khi gán list a = list b thì cả 2 đều trỏ tới 1 vùng nhớ nên sửa 1 là sửa 2 có thể dùng toán tử is để kiểm tra
+>>> a = [1, 2, 3]
+>>> a = b
+>>> a is b
+True
+Tuy nhiên,việc thay toàn bộ giá trị của một biến lại không gây ảnh hưởng tới biến kia,khi đó, 2 biến không cùng trỏ vào một giá trị nữa.
+>>> a = [1, 2, 3]
+>>> b = a
+>>> a is b
+True
+>>> a = [1, 2, 3, 4]
+>>> a is b
+False
+>>> a
+[1, 2, 3, 4]
+>>> b
+[1, 2, 3]
+Còn 1 th nữa là khi copy ma trận với nhau thì khi sửa list con của list 
+VD a[0][2]="a" thì cả 2 ma trận đều thay đổi còn khi thay a[0]="a thì chỉ ma trận thay đổi mới đổi(Dùng vòng lặp)
+
+- Các Cách copy list:
+>>> lst = [1, 2, 3]
+>>> lst_copy_1 = list(lst) # Cách 1
+>>> lst_copy_2 = lst[:] # Cách 2
+>>> lst_copy_3 = lst.copy() # Cách 3: dùng phương thức copy(), sẽ được Kteam đề cập đến trong các bài tiếp theo
+
+- Các phương thức :
+- Phương thức tiện ích:
++ <List>.count(sub, [start, [end]])
+Công dụng: Giống với phương thức count của kiểu dữ liệu chuỗi.
+Trả về một số nguyên, chính là số lần xuất hiện của sub trong List.
+Còn start và end là số kĩ thuật slicing (lưu ý không hề có bước).
+
++ <List>.index(sub[, start[, end]])
+Công dụng: Tương tự phương thức index của  kiểu dữ liệu chuỗi.
+
++ <List>.copy()
+Công dụng: Trả về một List tương tự với List[:]
+
++<List>.clear()
+Công dụng: Xóa mọi phần tử có trong List.
+Lưu ý: Các phiên bản Python 2.X hoặc dưới Python 3.2 sẽ không có phương thức này
+Khi xoá 1 list liên kết a (a is b) thì cả 2 đều bị xoá, khác với th thay đổi tất cả thì ko bị 
+
+- Phương thức cập nhập :
++ <List>.append(x)
+Công dụng: Thêm phần tử x vào cuối List
+Chú ý: Đừng bao giờ append một list vào chính nó.Vòng lặp vô tận
+
++ <List>.extend(iterable)
+Công dụng: Thêm từng phần tử một của iterable vào cuối List. {Chỉ 1 bậc}
+VD:# xem sự khác biệt giữa append và extend
+>>> Kteam = [1, 2, 3]
+>>> Kteam.extend([4, 5]) 
+[1, 2, 3, 4, 5]
+>>> Kteam.append([[6, 7], 8])
+[1, 2, 3, 4, 5, [6, 7], 8]
+
++ <List>.insert (i, x)
+Công dụng: Thêm phần x vào vị trí i ở trong List.
+Nếu vị trí i lại lớn hơn hoặc bằng số phần tử ở trong List thì kết quả sẽ tương tự như phương thức append.
+Khi bạn insert mà lại dùng vị trí i là số âm, thì vị trí được insert sẽ là i –1.
+Nếu vị trí i –1 (đang xét indexing âm) không có trong List, mặc định, phần tử x sẽ được thêm vào đầu List
+
++ <List>.pop([i])
+Công dụng: Bỏ đi phần tử thứ i trong List và trả về giá trị đó. 
+Nếu vị trí i không được cung cấp, phương thức này sẽ tự bỏ đi phần tử cuối cùng của List và trả về giá trị đó.
+
++ <List>.remove(x)
+Công dụng: Bỏ đi phần tử đầu tiên trong List có giá trị x. Nếu trong List không có giá trị x sẽ có lỗi được thông báo
+
+- Các phương thức xử lí:
++ <List>.reverse()
+Công dụng: Đảo ngược các phần tử ở trong List.
+
++ <List>.sort(key=None, reverse=False)
+
+Công dụng:  Sắp xếp các phần tử từ bé đến lớn bằng cách so sánh trực tiếp.
+Nếu reverse là False (false là giá trị mặc định), list sẽ được sắp xếp từ bé đến lớn (các phần tử nhỏ hơn sẽ đứng trước), 
+và ngược lại, nếu reverse là True, list sẽ được sắp xếp từ lớn đến bé.
+Tham số key mặc định là None (tức là sẽ sắp xếp một cách mặc định). 
+Còn nếu key được chỉ định, thì các phần tử được sắp xếp theo cái “quy ước” của key.
+VD: >>> a = ['This', 'is', 'How', 'Kteam']
+>>> b = a.copy()
+>>> a.sort()
+>>> b.sort(key=len)
+>>> b
+['is', 'How', 'This', 'Kteam']
+>>> a
+['How', 'Kteam', 'This', 'is']
+>>> lst = ['a', 1, 'b', 2, 2, 'b']
+>>> lst.sort(key=str)
+>>> lst
+[1, 2, 2, 'a', 'b', 'b']

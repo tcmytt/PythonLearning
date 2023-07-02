@@ -1,0 +1,94 @@
+Các phần tử của Dict phải là một cặp key-value,phân cách bởi dấu hai chấm (:),cách nhau ra bởi dấu phẩy (,).
+Không trùng key, có thể trùng value
+Dict là một unhashable object
+Các key buộc phải là một hash object
+{<key_1: value_1>, <key_2: value_2>, .., <key_n: value_n>}
+VD:  dic = {'name': 'Kteam', 'member': 69}
+- Dict Comprehension:
+>>> dic = {key: value for key, value in [('name', 'Kteam'), ('member', 69)]}
+{'name': 'Kteam', 'member': 69}
+- Khởi tạo:
+dict(iterable):iterable này đặc biệt hơn hơn các iterable mà bạn dùng để khởi tạo List hay Tuple, 
+đó là các phần tử trong iterable phải có 2 value đó chính là cặp key-value.
+Bạn có thể dùng List, Tuple hoặc bất cứ container nào (trừ mapping object) để chứa cặp key-value.
+VD:
+>>> iter_ = [('name', 'Kteam'), ('member', 69)]
+{'name': 'Kteam', 'member': 69}
+>>> f = [('ab'), ('cd')]
+{'a': 'b', 'c': 'd'}
+- dict.fromkeys(iterable, value)
+Công dụng: Cách này cho phép ta khởi tạo một dict với các keys nằm trong một iterable.
+ Các giá trị này đều sẽ nhận được một giá  trị với mặc định là None
+ VD:iter_ = ('name', 'number')
+>>> dic = dict.fromkeys(iter_, 'non None value')
+{'name': 'non None value', 'number': 'non None value'}
+- Lấy value trong Dict bằng key 
+Your_dict[key]
+{'name': 'Kteam', 'member': 69}
+>>> dic['name']
+'Kteam'
+- Thay đổi nội dung Dict trong Python:
+{'name': 'Kteam', 'member': 69}
+>>> dic['name'] = 'How Kteam'
+>>> dic
+{'name': 'How Kteam', 'member': 69}
+>>> dic['member'] = dic['member'] + 1
+>>> dic
+{'name': 'How Kteam', 'member': 70}
+- Thêm thủ công một phần tử vào dict:
+{'name': 'Kteam', 'member': 69}
+>>> dic['slogan'] = 'Free Education'
+>>> dic
+{'name': 'Kteam', 'member': 69, 'slogan': 'Free Education'}
+- Vấn đề cần lưu tâm khi sử dụng dict:
++ không gán dict với dict lỗi giống list
+
+- Các phương thức tiện ích:
++ <Dict>.copy()
+Công dụng: Giống với phương thức copy trong LIST. Để tránh lỗi gán.
++ <Dict>.clear()
+Công dụng: Loại bỏ tất cả những phần tử có trong Dict
+
+- Các phương thức xử lí :
++ <Dict>.get(key [,default])
+Công dụng: Trả về giá trị của khóa key. Nếu key không có trong Dict thì trả về giá trị default. 
+Default có giá trị mặc định là None nếu chúng ta không truyền vào.
++  <Dict>.items()
+Công dụng: Trả về một giá trị thuộc lớp dict_items. 
+Các giá trị của dict_items sẽ là một tuple với giá trị thứ nhất là key, giá trị thứ hai là value.
+Dict_items là một iterable.
++ <Dict>.keys()
+Công dụng: Trả về một giá trị thuộc lớp dict_keys. Các giá trị của dict_keys sẽ là các key trong Dict.
+Dict_keys là một iterable.
++ <Dict>.values()
+Công dụng: Trả về một giá trị thuộc lớp dict_values. Các giá trị của dict_values sẽ là các value trong Dict.
+Dict_values là một iterable.
++ <Dict>.pop(key [,default])
+Công dụng: Bỏ đi phần tử có key và trả về value của key đó. Trường hợp key không có trong dict.
+Báo lỗi KeyError nếu default là None (ta không thêm vào).
+Trả về default nếu ta thêm default vào.
++ <Dict>.popitem()
+Công dụng: Trả về một 2-tuple với key và value tương ứng bất kì (vấn đề này liên quan đến giá trị của hash của key. 
+Do đó bạn cũng hiểu vì sao key buộc phải là một hash object) trong Dict. 
+Và cặp key-value sẽ bị loại bỏ ra khỏi Dict.
+Nếu Dict là một empty Dict. Sẽ có lỗi KeyError
++ <Dict>.setdefault(key [,default])
+Công dụng: Trả về giá trị của key trong Dict. Trường hợp key không có trong Dict thì sẽ trả về giá trị default. 
+Thêm nữa, một cặp key-value mới sẽ được thêm vào Dict với key bằng key và value bằng default.
++ <D>.update([E, ]**F)
+Công dụng: Phương thức giúp bạn cập nhật nội dung cho Dict.
+VD: d = {'a': 1}
+>>> d.update(b=2,c=3)
+--- E = {'b': 2, 'c': 3}
+>>> d.update(E)
+--- E = [('b', 2), ('c', 3)]
+>>> d.update(E)
+---E_f = (['d', 69], ['e', 96])
+>>> d.update(E)
++ <Dict_A> | <Dict_B>
+Công dụng: Trả về một dict mới với các cặp key – value có mặt ở một trong 2 dict. 
+Nếu một key bất kì có trong cả 2 dict, thì giá trị được lấy sẽ là cặp key – value ở Dict_B
+VD:>>> {'1': 1, '2': 2} | {3: '3', 4: '4'}
+{'1': 1, '2': 2, 3: '3', 4: '4'}
+>>> {1: '1', 2: '2'} | {2: 'Two'}
+{1: '1', 2: 'Two'}

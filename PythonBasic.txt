@@ -1,0 +1,812 @@
+1.Ghi chú
+# <Nội dung ghi chú> :chú thích 1 Dòng
+"""
+ CHú thích nhiều dòng   :Có thể dùng nháy đơn thay nháy kép, Như nhau
+"""
+
+2.Lệnh print
+print( obj , sep=seperator , end= end )
+Mặc định sep = cách , end =\n (Xuống Dòng);
+
+3.Biến, Kiểu dữ liệu
+VD: a=10;
+print(type(a)); :In kiểu Biến
+- Kiểu dữ liệu số nguyên, động, phức(complex numbers);
++ VD số phức : a=10+9j;
++ Số nguyên trong python không giới hạn lưu số
++ Số nguyên có thể lưu dưới dạng :  + a=0b0101110;(Nhị Phân,binary)
+                                    + a=ob123;(Bát phân,octal)
+                                    + a=ox22A;(Thập Lục,Hexadecimal)
++ Số thực lớn nhất là 1.8*10^308 lớn hơn thì nó in inf(vô cùng).
++ In số thực với 2 số sau dấu phẩy :print('%.2f' % a); print('{:.2f}'.format(a))
++ Số phức có 2 phần a.real và a.imag
++ Phân số :from fractions import * # lấy toàn bộ nội dung của thư viện decimal
+>>> Fraction(1, 4)   # phân số với tử số là 1, mẫu số là 4.
+-Kiểu dữ liệu đúng sai(bool) : a=True,b=False; True là xâu khác rỗng, số khác 0
+-Xâu kí tự(str):
++ Muốn in cả xuống dòng dùng '''
+  đang
+  xuống 
+  dòng''' Dùng 3 nháy
+-Ép kiểu(casting):str(),int(),float();
+a=50.9;
+b=int(a); #a=50;
+
+4.Toán tử(operator)
+- (a**b) a mũ b , a//b Chia lấy nguyên , a/b chia bình thường,% chia lấy dư giống c++
++ 2**3 = 8 ,3//2=1 ,3/2=1.5 , 3%2=1
+- Mức độ Ưu tiên :Luỹ thừa ,nhân chia , cộng trừ,Not and
++ VD: a,b,c = 100,200,"sadsd";
+- Hoán vị a và b ta làm: a,b=b,a;
+- Toán tử := (Assignment expression) :
++ VD:b = (a += 1) + 2 --Lỗi ,b = (a := a + 3) + 3 --Ok
+- Toán tử nhận dạng : is và isnot :so sánh đối tượng
++ VD : a=1,b=1 ; a is b :false , a is a: true;
+- Toán tử thành viên : in và not in
++ VD : 'a' in 'abc' :true
+
+
+5.Nhập dữ liệu từ bàn phím, map:Ánh xạ
+- a = input('Nhap vao so nguyen : ');
++ Nhập cả 1 dòng rồi ấn enter , Kiểu dữ liệu khi nhập vào là str ,Ép Kiểu
++ a= int(input('Nhap vao so nguyen : '));
+- Nhập nhiều số cùng lúc trên 1 dòng :
+Bc1: Nhập: s= input();
+Bc2: Tách: a=s.split();
+Bc3: Gán lại: x,y,z=map(int,a);
+Hoặc x,y,z=map(int,input("Nhap 3 so nguyen").split());
+
+6.Hàm toán học
+- Thư viện math trong Python:
+>>> import math   # lấy nội dung của thư viện math về sử dụng
+- print(help(math))
+- math.tên hàm
+>>> math.trunc(3.9)
+>>> math.sqrt(16)
+>>> math.gcd(6, 4) # Ước chung lớn nhất
+>>> math.lcm(4, 5)
+>>> comb(n,k):chập k của n
+- buid-in có sẵn
++ abs(), round(), min max sum
+- Nếu ko muốn dùng math. thì ta dùng:
++ from math import *; Khi đó ta chỉ cần  a=lcm(4,5); là xong
+
+7.Chuỗi trong python <class str>
+- Chuôi trần :+ VD: a = r’\neu mot ngay’
+- Indexing
+- Cắt chuỗi từ trái qua phải : <chuỗi>[vị trí bắt đầu : vị trí dừng] 
+- Cắt chuỗi từ phải qua trái : <chuỗi>[vị trí bắt đầu : vị trí dừng: Bước] Mặc định bước là 1 Không được đặt bước =0
+- Thay đổi nội dung chuỗi: Cắt rồi lưu lại
+- Định dang chuỗi trong Python:
++ Định dạng bằng toán tử %
++ Định dạng bằng chuỗi f (f-string)
++ Định dạng bằng phương thức format
+- Các phương thức
+
+8.Kiểu dữ liệu List trong python
+-  Chứa trong [], chứa mọi đối tượng(cả chính nó).
+>>> lst = [1,2,5,"kteam"]
+- Giống chuỗi đa Số
+- Có thể thay đổi bằng indexing
+- Chú ý khi gán list này cho list khác
++  <List>.copy() , <List>.clear() , <List>.append(x) ,  <List>.extend(iterable)
+
+9.Kiểu dữ liệu tuple trong python
+- Chứa trong (), chứa mọi đối tượng(cả chính nó).
+(1, 'kteam', [2, 'k9'])
+- Lưu ý khi tuple có 1 phần tử thì đó ko phải tuple, nó giống cặp ngoặc () để được ưu tiên.
+- Do đó, khi muốn khởi tạo Tuple một phần tử, phải thêm dấu ',' vào sau giá trị đó, để báo cho Python biết, đây là Tuple.
+VD: >>> tup = (9,)
+- Không có Tuple Comprehension
+- Hàm tạo:  tuple(iterable)
+tup = tuple([1, 2, 3])
+(1, 2, 3)
+>>> str_tup = tuple('KTEAM')
+('K', 'T', 'E', 'A', 'M')
+- Toán tử trong tuple: 
++ CHuỗi giống tuple đều bất biến có hashcode
++ * in
+-Indexing : Giống list
+- Thay đổi nội dung trong tuple giống chuỗi
+- Ma trận:>>> tup = ((1, 2, 3), [4, 5])
+>>> tup[0]
+(1, 2, 3)
+>>> tup[0][2]
+3
+>>> tup[1][-2]
+4
+- Nếu như phần tử con của tuple là 1 unhash như list thì có thể thay đổi dc phần tử con đó
+- Phương thức:
++ <Tuple>.count(value)
+Công dụng: Trả về một số nguyên, chính là số lần xuất hiện của value trong Tuple.
++ <Tuple>.index(sub[, start[, end]])
+Công dụng: Tương tự phương thức index của kiểu dữ liệu chuỗi.
+-Tuple khác List ở chỗ Tuple không cho phép bạn sửa chữa nội dung, còn List thì có.
+ Vì đặc điểm đó, Tuple mạnh hơn List ở những điểm sau:
+Tốc độ truy xuất của Tuple nhanh hơn so với List
+Dung lượng chiếm trong bộ nhớ của Tuple nhỏ hơn so với List
+Bảo vệ dữ liệu của bạn sẽ không bị thay đổi
+Có thể dùng làm key của Dictonary (một kiểu dữ liệu sẽ được giới thiệu). Điều mà List không thể vì List là unhash object.
+Những điểm trên là những điều giúp bạn có thể cân nhắc việc chọn Tuple hay List để lưu dữ dữ liệu dưới một mảng.
+
+10.Sự khác nhau về toán tử của Hashable object và Unhashable object trong Python
+- Hàm:  id(<giá trị>) :Trả về Giá trị này là một giá trị duy nhất và là hằng số không thay đổi suốt chương trình.
+Trong chi tiết bổ sung của CPython có nói giá trị trả về của hàm id là địa chỉ của giá trị (đối tượng) đó trong bộ nhớ.
+>>> n = 69
+>>> s = 'How KTeam'
+>>> lst = [1, 2]
+>>> tup = (3, 4)
+>>> id(n)
+1446271792
+>>> id(s)
+53865712
+>>> id(lst)
+53838352
+>>> id(tup)
+53865768
+>>> id(123)
+1446272656
+>>> id('Free Education')
+53865832
+- Với hash object, bạn không thể thay đổi nội dung của nó. 
+Do đó, Python sẽ xin đủ khoảng trống để lưu trữ dữ liệu của bạn, không nhiều hơn và cũng không ít hơn. 
+Giúp không hoang phí bộ nhớ của bạn. 
+Thế nên, khi bạn cộng thêm một thứ gì đó, Python không biết nhét cái thứ bạn muốn cộng vào chỗ nào. 
+Nên nó đành cuốn gói đi ra chỗ đó, tìm chỗ mới thoáng có đủ khoảng trống.
+Còn với unhash object. Là một đối tượng bạn thay đổi được nội dung, 
+vì thế, Python luôn xin dư bộ nhớ để chừa chỗ cho các giá trị tiếp theo bạn có thể thêm vào. 
+Trong bài trước, Kteam đã đề cập đến việc Tuple chiếm ít dung lượng hơn List vì Tuple là hash object. 
+- Thay đổi giá trị tuple khác list
+>>> lst = [1, 2]
+>>> lst.append(3)
+>>> lst
+[1, 2, 3]
+>>> tup = (1, 2)
+>>> tup += (3,)
+>>> tup
+(1, 2, 3)
+
+11.Kiểu dữ liệu set
+- Chứa trong {}, Set không chứa nhiều hơn 1 phần tử trùng lặp.
+- Set chỉ có thể chứa các hashable object nhưng chính nó không phải là một hashable object. 
+Do đó, bạn không thể chứa một set trong một set.
+>>> set_1 = {69, 96}
+>>> set_1 = {1, 1, 1} # các giá trị trùng lặp bị loại bỏ
+>>> set_1
+{1}
+>>> empty_set = {}  # thử khởi tạo set rỗng
+>>> empty_set
+{}
+>>> type(empty_set) # không phải là set
+<class 'dict'>
+- Sử dụng Set Comprehension:
+>>> set_1 = {value for value in range(3)}
+>>> set_1
+{0, 1, 2}
+- Hàm tạo :set(iterable) giống list
+- Toán tử :
++ value in <Set> 
+Công dụng: Kết quả trả về là True nếu value xuất hiện trong Set. Ngược lại sẽ là False
++ <Set1> - <Set2> 
+Công dụng: Kết quả trả về là một Set gồm các phần tử chỉ tồn tại trong Set1 mà không tồn tại trong Set2
++ <Set1> & <Set2>
+Công dụng: Kết quả trả về là một Set chứa các phần tử vừa tồn tại trong Set1 vừa tồn tại trong Set2
++ <Set1> | <Set2>
+Công dụng:  Kết quả trả về là một Set chứa tất cả các phần tử tồn tại trong hai Set
+<Set1> ^ <Set2>
+Công dụng:  Kết quả trả về là một Set chứa tất cả các phần tử của 2 set bỏ phần vừa tồn tại trong Set1 vừa tồn tại trong Set2(Chung)
+-Indexing và cắt Set trong Python : Không hỗ trợ
+- Set không phải là một hash object
+
+12.Kiểu dữ liệu dict trong python
+Các phần tử của Dict phải là một cặp key-value,phân cách bởi dấu hai chấm (:),cách nhau ra bởi dấu phẩy (,).
+Không trùng key, có thể trùng value
+Dict là một unhashable object
+Các key buộc phải là một hash object
+{<key_1: value_1>, <key_2: value_2>, .., <key_n: value_n>}
+
+13.Xử lý file trong Python
+- Mở file: open(file, mode='r')
+- file object nhận được từ hàm open cũng là một iterable.(Có thể dùng list,tuple đọc file)
+VD:file_object = open('kteam.txt')
+- Các mode cơ bản: 
++ r: read chỉ đọc
++ r+: đọc và ghi
++ w: write ghi xoá hết nội dung file đang có, nếu ko có file sẽ tự tạo theo tên truyền vào
++ w+ :ghi và đọc, xoá hết nội dung file đang có, nếu ko có file sẽ tự tạo theo tên truyền vào
++ a:add để ghi,nếu ko có file sẽ tự tạo theo tên truyền vào
++ a+:để ghi và đọc,nếu ko có file sẽ tự tạo theo tên truyền vào
+- Đóng file: <File>.close()
+
+- Các phương thức:
+Đọc File trong Python:
++ <File>.read(size=-1)
+Công dụng: Nếu size bị bỏ trống hoặc là một số âm. *Nó sẽ đọc hết nội dung của file đồng thời đưa con trỏ file tới cuối file.
+Do đó dùng hàm read lần nữa sẽ ko đọc được lần nữa 
+Nếu không nó sẽ đọc tới n kí tự (với n = size) hoặc cho tới khi nội dung của file đã đọc xong.
+Sau khi đọc được nội dung, nó sẽ trả về dưới một dạng chuỗi.
+Nếu không đọc được gì, phương thức sẽ trả về một chuỗi có độ dài bằng 0
+>>> fobj = open('kteam.txt')
+>>> data = fobj.read()
+>>> print(data)
++ <File>.readline(size=-1)
+Công dụng: Với parameter size thì hoàn toàn tương tự như phương thức read.
+Khác biệt ở chỗ, phương thức readline chỉ đọc một dòng có nghĩa là đọc tới khi nào gặp newline hoặc hết file thì ngừng.
+Con trỏ file cũng sẽ đi từ dòng này qua dòng khác.
++ <File>.readlines(hint=-1)
+Công dụng: Phương thức này sẽ đọc toàn bộ file, sau đó cho chúng vào một list. Với các phần tử trong list là mỗi dòng của file.
+Con trỏ file sẽ được đưa  tới cuối file. Khi đó, nếu bạn tiếp tục dùng readlines. Bạn sẽ nhận được một list rỗng.
+VD:fobj = open('kteam.txt')
++list_content = list(fobj)
++tup_content = tuple(fobj)
+
+Ghi file:
++ <File>.write(text)
+Công dụng: Phương thức này sẽ trả về số kí tự mà chúng ta ghi vào.
+VD: fobj = open('kteam_2.txt', 'w')
+>>> fobj.write('The first line\n') # thêm \n để kết thúc 1 dòng
+Con trỏ file lại chạy xuống cuối
+
+- Kiểm soát con trỏ file:
++ <File>.seek(offset, whence=0)
+Với Python 3.X. Một text file sẽ chỉ được sử dụng whence = 0. whence = 1 hoặc whence = 2 chỉ sử dụng với binary file.
+Công dụng: Phương thức này giúp ta di chuyển con trỏ từ vị trí đầu file qua offset kí tự. Và parameter offset phải là một số tự nhiên.
+Nhờ phương thức này, ta có thể ghi nội dung từ bất cứ đâu trong file.
+Và từ đó ta có thể đọc lại file sau khi ta đưa con trỏ file xuống cuối file.
+VD: fobj = open('kteam.txt')
+fobj.read()
+"How Kteam\nFree Education\n\nShare to better\n\nprint('hello world!')\n"
+fobj.seek(0)# seek (x) x là vị trí kí tự
+fobj.read()
+"How Kteam\nFree Education\n\nShare to better\n\nprint('hello world!')\n"
+fobj.close()
+
+- Câu lệnh with(tác dụng để tự đóng file)
+with expression [as variable]:
+    with-block    
+Kết thúc lệnh with là đóng file luôn
+Nhớ rằng with-block nằm thụt vào so với dòng with expression (theo chuẩn PEP8 là 4 space và là dùng space không dùng tab)
+Câu lệnh này liên quan đến phương thức __enter__ và __exit__ của đối tượng.
+VD: >>> with open('kteam.txt') as fobj:
+...     data = fobj.read()
+>>> with (fi := open("kteam.txt", 'r')):
+...   data = fi.read()
+
+14.Iteration(Lặp lại) và một số hàm hỗ trợ cho iteration object trong Python
+- Iteration là một khái niệm chung cho việc lấy từng phần tử một của một đối tượng nào đó, 
+bất cứ khi nào bạn sử dụng vòng lặp hay kĩ thuật nào đó để có được giá trị một nhóm phần tử thì đó chính là Iteration.
+- Iterable object là một object có phương thức __iter__ trả về một iterator, 
+hoặc là một object có phương thức __getitem__ cho phép bạn lấy bất cứ phần tử nào của nó bằng indexing ví dụ như Chuỗi, List, Tuple.
+-Dùng hàm: next(iter) để đến phần tử tiếp
+VD:>>> [x for x in range(3)] # thuộc lòng 3 giá trị của comprehension này
+[0, 1, 2]
+>>> itor = (x for x in range(3)) # sử dụng () cho ra một generator expression – một iterator
+>>> next(itor)
+0
+>>> next(itor)
+1
+>>> next(itor)
+2
+>>> next(itor) # chỉ có 3 giá trị, và ta đã lấy hết
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+StopIteration
+- iter_list là một iterator tạo từ list
+lst = [6, 3, 7, 'kteam', 3.9, [0, 2, 3]]
+>>> iter_list = iter(lst) # iter_list là một iterator tạo từ list
+- Một số hàm hỗ trợ cho iterable object trong Python:
+-iterable là những kiểu dữ liệu hỗ trợ iter
++ sum(iterable, start=0)
+Công dụng: Trả về tổng các giá trị của iterable và iterable này chỉ chứa các giá trị là số. 
+Còn start chính là giá trị ban đầu. Có nghĩa là sẽ cộng từ start lên. Mặc định là 0
+chạy xong thì con trỏ trỏ đến cuối nên ko dùng lại được nữa
+VD:>>> sum([1, 6, 3])
+10
+>>> sum([1, 6, 3], 10)
+20
+>>> sum(iter([6, 3, 9]))
+18
+>>> it = (x for x in range(3))
+>>> sum(it)
+3
+>>> next(it)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+StopIteration
++ max(iterable, *[, default=obj, key=func])
+Công dụng: Nhận vào một iterable.Tìm giá trị lớn nhất bằng key (mặc định là sử dụng operator >). 
+Default là giá trị muốn nhận về trong trường hợp không lấy được bất kì giá trị nào trong iterable.
+Dấu * chính là kí hiệu yêu cầu keyword-only argument. Bạn sẽ hiểu thêm khi Kteam giới thiệu parameter trong function.
++ min(iterable, *[, default=obj, key=func])
+Giống max
++ sorted(iterable, /, *, key=None, reverse=False)
+mặc định Nhỏ đến lớn , reverse=True thì lớn đến Nhỏ
+
+15.Kiểu dữ liệu boolean
+- Python so sánh các kí tự với nhau bằng cách đưa chúng về dưới dạng số bằng hàm ord.
+>>> ord('A')
+65
+>>> ord('a')
+97
+- Lưu ý về is:Các số từ -5 đến 256 hoặc là một số chuỗi có số kí tự dưới 20 thì 
+các biến có cùng một giá trị sẽ có cùng một giá trị trả về từ hàm id.
+>>> a = -5
+>>> b = -5
+>>> a is b
+True
+>>> c = 256
+>>> d = 256
+>>> c is d
+True
+>>> a = 'abc'
+>>> b = 'abc'
+True
+- NOT, AND và OR
+- Mọi giá trị khi chuyển về Boolean đều là True trừ một số trường hợp sau
+Số 0
+None
+Rỗng
+- Với python có thể làm:
+>>> 1 < a < 6
+True
+>>> b = -4
+>>> b < -3 < -1 < 0 < a < 6 # thậm chí là dài như thế này
+True
+Hoặc: >>> k = 4
+>>> k == 3 or k == 4 or k == 5
+>>> k in (3, 4, 5)# Gọn hơn
+
+16. Câu điều kiện
+- if expression:
+     # If-block
+  elif expression:
+     # if-block
+else:
+    # else-block
+- if block cần thụt vào so với If
+- Shorthand if-else:<Giá trị 1> if <Điều kiện> else <Giá trị 2> ;
+VD: t=5;
+>>> print('t bằng 5' if t == 5 else 't khác 5')
+t bằng 5
+- Cấu trúc điều kiện match-case:
+Trong trường hợp tất cả các pattern đều không phù hợp, chương trình sẽ thực hiện các lệnh bên trong lệnh case cuối
+>>> t = 5
+>>> match t:
+...     case 1: # Thực hiện lệnh bên trong nếu t = 1, tương đương với if t == 1
+...             print("t = 1")
+...     case _: # Lệnh bên trong được thực hiện nếu như tất cả các lệnh bên trên đều bị bỏ qua
+...             print("t > 3")
+- Mở rộng 
+ VD: case 1 | 3 | 5 | 7 | 9:
+ case 4 if x == 1:
+...         print("t = 4 và x = 1")
+...     case 4 if x == 0:
+...         print("t = 0 và x = 0")
+
+17. Vòng lặp while
+while expression:
+     # while-block
+- Sử dụng vòng lặp để xử lí chuỗi, list, tuple
+- break: thoát luôn vòng lặp , continue:Bỏ qua 1 vòng lặp : giống c++
+- pass;Khi thực hiện các lệnh trong vòng lặp (và cả hàm) , nó sẽ xem lệnh pass này như là “vô hình”. 
+Nhưng nó sẽ giúp tránh lỗi nếu như vòng lặp (hàm) của bạn không có bất kì một lệnh nào.
+>>> while a > 0:
+...
+  File "<stdin>", line 2
+    ^
+IndentationError: expected an indented block after 'while' statement on line 1
+>>> while a > 0:
+...     pass
+>>>
+- Câu lệnh while else:
+while expression:
+    # while-block
+else:
+    # else-block
+Nếu trong while-block có break thì nó luôn ko thực hiện trong else
+
+18. Vòng lặp for 
+- DÙng while khi không biết số phần tử iter
+>>> iter_ = (x for x in range(3)) # giả sử ta không biết có 3 phần tử
+>>> while 1: # 1 là một expression True
+...     try:
+...         print(next(iter_))
+...     except StopIteration:
+...         break
+- vòng lặp for:
+for variable_1, variable_2, .. variable_n in sequence:
+    # for-block
+- Trong các ngôn ngữ khác cần vòng lặp mới for-each để duyệt thì python ko cần:
+Sử dụng range để duyệt một List, Tuple, Chuỗi hoặc không cần:Ta dùng range khi cần cập nhập , do th ko cần ko lấy dc giá trị gốc
+VD: 
+TH ko cần:
+lst = [s, (1, 2, 3), {'abc', 'xyz'}]
+for i in lst:
+   print(i)
+TH cần:
+>>> lst = [1, 2, 3]
+>>> for i in range(len(lst)):
+...     lst[i] += 1
+Dict-items không phải là một iterator object. Cũng không phải là một object cho phép bạn indexing. Nhưng nó vẫn là một iterable
+TH dict:
+for key, value in howkteam.items():
+...     print(key, '=>', value)
+- VÒng lặp for cũng có else
+
+19.Kiểu dữ liệu range
+- range(stop) :tạo một dãy số bắt đầu bằng số 0 và kết thúc là stop – 1.Dãy số này là một cấp số cộng với công sai là 1.
+VD: k = range(3)
+>>> k[0] # range có hỗ trợ indexing
+0
+>>> k[1]
+1
+>>> k[-1]
+2
+>>> k[3]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IndexError: range object index out of range
+list(k)
+[0, 1, 2]
+- range(start, stop[, step])
+VD: >>> list(range(2, 5))
+[2, 3, 4]
+>>> list(range(4, 1, -1))
+[4, 3, 2]
+-DUyệt list, tuple ,str:
+>>> lst = [s, (1, 2, 3), {'abc', 'xyz'}]
+>>> for i in range(len(lst)):
+...     print(lst[i])
+...
+
+20. Comprehension trong python
+- Trong Python, có ba loại comprehension là list comprehension, set comprehension và dictionary comprehension. 
+CÚ pháp : [lệnh for biến in iterable if condition]
++ List comprehension:
+numbers = [1, 2, 3, 4, 5]
+squares = [x**2 for x in numbers]
+[1, 4, 9, 16, 25]
++ Set comprehension:
+numbers = {1, 2, 3, 4, 5}
+squares = {x**2 for x in numbers}
+{1, 4, 9, 16, 25}
++ Dictionary comprehension:
+fruits = {'apple': 1, 'banana': 2, 'orange': 3}
+prices = {key: value * 2 for (key, value) in fruits.items()}
+{'apple': 2, 'banana': 4, 'orange': 6}
+
+21.hàm enumerate
+- enumerate(iterable[, start]) start mặc định ko điền là 0
+VD: >>> student_list = ['Long', 'Trung', 'Giàu', 'Thành']
+Muốn đánh số thứ tự:
+gen = enumerate(student_list)
+>>> for idx, student in enumerate(student_list):
+...     print(idx, '=>', student)
+...
+0 => Long
+1 => Trung
+2 => Giàu
+3 => Thành
+
+22. Hàm
+def <function_name>(parameter_1 [: <kiểu dữ liệu gợi ý của parameter_1>], parameter_2 [: <kiểu dữ liệu gợi ý của parameter_2>], .., 
+parameter_n [: <kiểu dữ liệu gợi ý của parameter_n>]) [-> <kiểu dữ liệu trả về được gợi ý> ] 
+    function-block
+    return 
+VD:>>> def P(SomeThing: str) -> None:
+...     print(SomeThing)
+...     print("Printed by Print-function")
+- <function>(): gọi hàm
+-  <tên biến> = <function> 
+>>> t = P
+>>> t is P
+True 
+ t("print Kteam with t")
+- Parameter và Argument:
+parameter chính là tham số của hàm – là tên các biến sẽ được sử dụng trong hàm. 
+Còn argument là đối số, tức là giá trị mà ta truyền cho parameter.
+- Default argument:
+>>> def kteam(name, greating='Hi'):
+...     print(greating, name + '!')
+Lưu ý: Khi bạn đưa default argument cho các parameter, phải để các parameter có default argument ở sau cùng.
+Default argument là một unhashable container
+Như các bạn đã biết, unhashable container phổ biến mà ta đã từng biết như LIST, DICT, SET.
+- <List>.sort(key=None, reverse=False)
+>>> def compare(value: str) -> int:
+...     return len(value)
+>>> a = ['abb', 'z', 'tt', 'ryu']
+>>> a.sort(key=compare) # sắp xếp list dựa trên độ dài của các phần tử (chuỗi) của list
+['z', 'tt', 'abb', 'ryu']
+- CHạy chương trình : Thay cho hàm main giống c++
+if __name__ == "__main__" :
+  code
+- positional buộc phải đứng trước keyword:
+>>> def teo_with_sone(name, verb):
+...     print('Teo', verb + 's', name)
+...
+>>> teo_with_sone('Python', 'love')
+Teo loves Python
+>>> teo_with_sone('HTML', verb='like')
+Teo likes HTML
+>>> teo_with_sone(verb='like', 'CSharp')
+  File "<stdin>", line 1
+SyntaxError: positional argument follows keyword argument
+>>> teo_with_sone(name='Java', 'hate')
+  File "<stdin>", line 1
+SyntaxError: positional argument follows keyword argument
+- Keyword argument:(Phải có chữ reverse)
+>>> sorted([3, 4, 1], reverse=True)
+[4, 3, 1]
+>>> sorted([3, 4, 1], True)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: must use keyword argument for key function
+Tiện lợi:
+>>> def Teo(a, b=2, c=3, d=4):
+...     f = (a + d) * (b + c)
+...     print(f)
+...
+>>> Teo(1)
+25
+>>> Teo(1, 2, 3, 5)
+30
+>>> Teo(1, d=5)
+30
+Đôi lúc, chúng ta nên sử dụng keyword argument để tiện lợi và rõ ràng.
+- Bắt buộc dùng keyword argument:
+def function (*, key_arg1, key_arg2):
+# function-block
+
+Lưu ý: ta có thể thay thế dấu * bằng *identifier. Tuy nhiên phổ biến vẫn là *.
+Khi tạo một hàm mà có một parameter *. 
+Thì Python sẽ hiểu đó không phải là parameter mà chính là syntax để rồi nó biến các parameter sau * thành các keyword only argument 
+(chỉ nhận giá trị theo kiểu keyword argument)
+
+23.Kiểu dữ liệu Function trong Python - Packing và unpacking arguments
+- Packing chính là việc đóng gói toàn bộ dữ liệu vào một vùng chứa duy nhất. 
+Còn unpacking thì ngược lại, nó sẽ lần lượt bê ra các giá trị từ một vùng chứa nào đó.
+- Unpacking arguments với *:
+>>> def kteam(k, t, e, r):
+...     print(k)
+...     print(t, e)
+...     print('end', r)
+...>>> lst = ['123', 'Kteam', 69.96, 'Henry']
+Ta cần lấy các giá trị trong lst làm đối Số
+Cách 1:>>> kteam(lst[0], lst[1], lst[2], lst[3])
+Cách 2:>>> kteam(*lst)
+Khi bạn sử dụng *,bạn có thể unpack các container khác như Tuple, Chuỗi, Generator, Set, Dict (chỉ lấy được key).
++ Lưu ý:
+Pass argument bằng cách unpacking argument như thế này là đang truyền vào dưới dạng positional argument. 
+Hãy cẩn thận sử dụng kĩ thuật này với những hàm có parameter dạng keyword-only argument.
+>>> def a(*, s, d):
+...     print(s, d)
+...
+>>> a(*('a', 'b'))
+Traceback (most recent call last):
+Trong trường hợp container của bạn unpack các giá trị có trong container nhưng vẫn chưa đủ yêu cầu của hàm, thì bạn có thể truyền thêm:
+>>> kteam(*('a', 'b', 'c'), 'd')
+- Packing arguments với *:
+>>> def kteam(*args):
+...     print(args)
+...     print(type(args))
+...
+>>> kteam('Kteam', 69.96, 'Henry')
+('Kteam', 69.96, 'Henry')
+<class 'tuple'>
+>>> kteam(*(x for x in range(7))) # unpack sau đó là pack
+(0, 1, 2, 3, 4, 5, 6)
+<class 'tuple'>
+- Lưu ý: Nếu sau một packing parameter còn có những parameter khác, 
+khi gọi hàm muốn truyền giá trị vào cho các parameter sau packing parameter bạn cần phải sử dụng keyword argument.
+>>> def f(*args, kter):
+...     print(kter)
+>>> f('1', '2')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: f() missing 1 required keyword-only argument: 'kter'
+>>> f('1', '2', kter='3')
+3
+- Unpacking arguments với **
+Với Dict, thì nó phức tạp hơn một xíu khi mỗi  phần tử là một cặp key và value. 
+Vậy nên một dấu * là không đủ nội công để unpack hết được các giá trị. Do đó ta phải nhờ đến một cặp **.
+Nếu bạn unpacking một Dictionary để truyền argument vào cho hàm khi gọi hàm thì đây chính là dạng keyword argument. 
+Vậy nên bạn phải chắc chắn rằng parameter với key là giống nhau.
+>>> dic = {'name': 'Kteam', 'member': 69}
+>>> def kteam(name, member):
+...     print('name =>', name)
+...     print('member =>', member)
+>>> kteam(**dic)
+name => Kteam
+member => 69
+- Packing arguments với **
+>>> def kteam(**kwargs):
+...     for key, value in kwargs.items(): # phương thức items của kiểu dữ liệu Dict
+...         print(key, '=>', value)
+>>> kteam(id=3424, name='Henry', age=18, lang='Python')
+id => 3424
+name => Henry
+age => 18
+lang => Python
+
+24. Kiểu dữ liệu Function trong Python - Biến locals và globals
+- global <variable>
+Lệnh này cho phép khai báo trong hàm nhưng lại là global, dùng ở đâu cũng dc
+- Biến local trùng tên global thì ưu tiên local
+
+25. hàm eval 
+- Hàm eval() trong Python là một hàm được sử dụng để tính toán giá trị của một biểu thức chuỗi được truyền vào như một tham số. 
+Hàm này thường được sử dụng khi cần tính toán các biểu thức số học hoặc các biểu thức logic.
++ eval(expression[, globals[, locals]])
+VD: result = eval("2 + 3 * 4")
+print(result)  # Output: 14
+ 
+26.Kiểu dữ liệu Function trong Python - Return
+- Dùng return để trả về nhiều giá trị một lúc
+Python thiết kế đặc biệt để có thể unpack các object trả về
+VD:def cal_rec_area_per(width, height):
+    perimeter = (width + height) * 2
+    area = width * height
+    return perimeter, area
+rec_width = 3
+rec_height = 9
+rec_per, rec_area = cal_rec_area_per(rec_width, rec_height)
+print(rec_per, rec_area)
+24 27
+
+27.Kiểu dữ liệu function trong Python – Yield
+- Generator là iterator, một dạng của iterable nhưng khác ở chỗ bạn không thể tái sử dụng.
+Generator không lưu trữ tất cả các giá trị của bạn ở bộ nhớ, mà nó sinh ra lần lượt
+>>> kteam_gen = (value for value in range(3))
+>>> for value in  kteam_gen:
+...     print(value)
+...
+0
+1
+2
++ Cố in lại lần nữa
+>>> for value in kteam_gen:
+...     print(value)
+Không in được
+- Lệnh yield
++ Ưu điểm: Tốc độ, khi sử dụng generator, để duyệt các giá trị thì generator sẽ nhanh hơn khi khi bạn duyệt một iterable lưu trữ một lúc tất cả các giá trị
++ Lệnh này cách sử dụng gần giống với lệnh return, tuy nhiên nó khác return ở chỗ trả về một object thì yield sẽ trả về một generator.
++ Khi gọi hàm có yield nó chạy tiếp chỗ tạm dừng chứ không chạy lại từ đầu(Sinh ra từ chỗ kết thúc lần gọi trước) 
+VD:>>> def square(lst):
+...     for num in lst:
+...             yield num**2
+>>> kteam_gen = square([1, 2, 3])
+>>> for value in kteam_gen:
+...     print(value)
+1
+4
+9
+- Phương thức send (Gửi giá trị cho yield lúc tạm dừng)
++ generator.send(value)
+VD:>>> def gen():
+...     for i in range(4):
+...             x = yield i
+...             print('value sent from you', x)
+...
+>>> g = gen() # gán generator này cho biến g
+>>> next(g) # gọi hàm next để chạy lệnh yield "x = yield i"
+0
+>>> g.send('Kteam') # x vừa nãy khi gán cho biến yield giờ sẽ được gửi giá trị
+value sent from you Kteam
+1
+>>> g.send('Free education')
+value sent from you Free education
+2
+>>> next(g) # lần này ta không dùng send, mặc định giá trị gửi vào là None
+value sent from you None
+3
+--> Hàm trên có range(4) nên gửi được liên tục 4 lần 
+
+>>> def gen():
+...     while True:
+...             x = yield # ở đây ta đang yield None, vì ta không cần thiết sinh giá trị gì ở  đây
+...             yield x ** 2
+...
+>>> g = gen()
+>>> next(g) # chạy lệnh yield để ta gửi giá trị cho biến x lần sau
+>>> g.send(2)
+4
+>>> next(g) # tiếp tục chạy yield để có thể gửi giá trị
+>>> g.send(10)
+100
+--> Nếu không có range() ta dùng next()
+
+28.Kiểu dữ liệu function trong Python – Lambda
+- lambda là hàm nặc danh (anonymous).
+- lambda argument_1, argument_2, …, argument_n : expression
+VD:
+>>> power_a = lambda x, a=2: x ** a
+>>> power_a(2)
+4
+- Vì sao dùng lambda?: lambda là một expression, không phải một câu lệnh. Nên lambda có thể ở nhiều nơi mà “def” không thể.
+>>> kteam_lst = [lambda x: x**2, lambda x: x**3, lambda x: x**4] # một list với các phần tử là các hàm nặc danh
+>>> kteam_lst[0]
+<function <lambda> at 0x002CC618>
+>>> kteam_lst[0](2) # 2**2
+4
+>>> kteam_lst[-1](4) # 4**4
+256
+>>> for func in kteam_lst:
+...     func(3) # 3**2, 3**3, 3**4
+...
+9
+27
+81
+- Câu điều kiện cho lambda:
+Cách 1:
+b if a else c
+Cách 2:
+(a and b) or c
+VD: Nên dùng cách 1
+>>> find_greater = lambda x, y: x if x > y else y
+>>> find_greater(1, 3)
+3
+>>> find_greater(6, 2)
+6
+- Lambda chồng lambda:
+>>> kteam = lambda first_string: (lambda second_string: first_string + second_string)
+>>> slogan = kteam('How Kteam ')
+>>> slogan('Free Education')
+'How Kteam Free Education'
+>>> (lambda first_string: (lambda second_string: first_string + second_string))('How Kteam ')('Free Education')
+'How Kteam Free Education'
+
+29. Kiểu dữ liệu Function trong Python - Functional tools
+- Hàm map():update dữ liệu (Ánh xạ) ,trả về yield
++ map(func, iterable) : lấy từng biến trong iter chạy qua func
+>>> def inc(x): return x + 1
+...
+>>> kteam = [1, 2, 3, 4]
+>>> list(map(inc, kteam)) # dùng constructor list để ta dễ quan sát dữ liệu
+[2, 3, 4, 5]
+HOẶC
+>>> list(map(lambda x: x + 1, kteam))
+- Mở rộng hàm: map(func, *iterable)
+>>> func = lambda x, y: x + y
+>>>
+>>> kteam_1 = [1, 2, 3, 4]
+>>> kteam_2 = [5, 6, 7, 8]
+>>>
+>>> kteam = map(func, kteam_1, kteam_2)
+>>> list(kteam)
+[6, 8, 10, 12]
+- Hàm filter(): Lọc, trả về yield
++ filter(function or None, iterable)
+Lưu ý: không như hàm map, iterable ở đây chỉ là 1 container, không hề có packing argument.
+Hàm filter lấy từng giá trị trong iterable, sau đó gửi vào hàm, nếu như giá trị hàm trả ra 
+là một giá trị mà khi chuyển sang kiểu dữ liệu boolean là True thì sẽ yield giá trị đó, nếu không thì bỏ qua.
+VD:
+>>> func = lambda x: x > 0
+>>>
+>>> kteam = [1, -3, 5, 0, 2, 6, -4, -9]
+>>> list(filter(func, kteam))
+[1, 5, 2, 6]
+Tiếp đến là một ví dụ khác khi ta gửi None thay vì một function
+>>> kteam = [0, None, 1, 'Kteam', '', 'Free Education', 69, False]
+>>> list(filter(None, kteam))
+[1, 'Kteam', 'Free Education', 69]
+- Hàm reduce(): Trả về giá trị ko giống 2 hàm trước trả về yield
+python 3.X cần import :from functools import reduce
++ reduce(function, sequence[, initial])
++ Hàm function này sẽ trả ra một giá trị (ta kí hiệu là A). Sau đó lấy tiếp giá trị thứ ba của sequence (index 2), 
+rồi gửi vào function cũng theo thứ tự (A, index 2), rồi lại lặp lại như thế cho tới khi hết sequence.
+VD:
+>>> kteam_add = lambda x, y: x + y
+>>> kteam = [1, 2, 3, 4, 5]
+>>> reduce(kteam_add, kteam) # ((((1+2)+3)+4)+5)
+15
++ Khi có [, initial] : 
+>>> kteam = [1, 2, 3, 4]
+>>> kteam_add = lambda x, y: x + y
+>>> kteam_multi = lambda x, y: x * y
+>>>
+>>> reduce(kteam_add, kteam, 10)
+20
+>>> reduce(kteam_multi, kteam, 10)
+240
+
+30.Đệ quy , module , package

@@ -1,0 +1,199 @@
+1. Hàm constructor
+- Đặt tên __init__(self) : self Là chính nó
+class SieuNhan:
+    def __init__(self, para_ten, para_vu_khi, para_mau_sac):
+        self.ten = "Sieu nhan " + para_ten
+        self.vu_khi = para_vu_khi
+        self.mau_sac = para_mau_sac
+    def xin_chao(self):
+        return "Xin chao, ta chinh la " + self.ten
+sieu_nhan_A = SieuNhan("do", "Kiem", "Do")
+
+print(sieu_nhan_A.xin_chao()) # vì nó là hàm nên nhớ là hãy thêm () để gọi hàm
+print(SieuNhan.xin_chao(sieu_nhan_A)) # một cách gọi khác nhưng rất không phổ biến
+    
+2.Thuộc tính
+- class SieuNhan:
+    suc_manh = 50
+    def __init__(self, para_ten, para_vu_khi, para_mau_sac):
+        self.ten = para_ten
+        self.vu_khi = para_vu_khi
+        self.mau_sac = para_mau_sac
+
+sieu_nhan_A = SieuNhan("Sieu nhan do", "Kiem", "Do")
+print(SieuNhan.suc_manh)
+print(sieu_nhan_A.suc_manh)
+
+SieuNhan.suc_manh = 40
+print(SieuNhan.suc_manh)
+print(sieu_nhan_A.suc_manh)
+
+KQ:50
+50
+40
+40
+
+3.Class method , static method
+Class method:
+class SieuNhan:
+    suc_manh = 50
+    def __init__(self, para_ten, para_vu_khi, para_mau_sac):
+        self.ten = para_ten
+        self.vu_khi = para_vu_khi
+        self.mau_sac = para_mau_sac
+    @classmethod
+    def from_string(cls, s): # thường những phương thức xử lí thế này hay có tên là from…
+        lst = s.split('-')
+        new_lst = [st.strip() for st in lst]
+        ten, vu_khi, mau_sac = new_lst
+        return cls(ten, vu_khi, mau_sac)
+
+infor_str = "Sieu nhan do - Kiem - Do"
+sieu_nhan_A = SieuNhan.from_string(infor_str)
+print(sieu_nhan_A.__dict__)
+
+static method:
+class SieuNhan:
+    suc_manh = 50
+    def __init__(self, para_ten, para_vu_khi, para_mau_sac):
+        self.ten = para_ten
+        self.vu_khi = para_vu_khi
+        self.mau_sac = para_mau_sac
+    @staticmethod
+    def bien_hinh():
+        print("1, 2, 3. Sieu nhan bien hinh")
+
+sieu_nhan_A = SieuNhan("Sieu nhan do", "Kiem", "Do")
+sieu_nhan_A.bien_hinh()
+
+Chú ý:
+Nếu bạn dựng một phương thức cần sử dụng đối tượng đó thì dùng regular method
+Nếu bạn cần dùng class thì dùng class method
+Trường hợp còn lại (tức là không dùng gì) thì dùng static method
+
+4. Kế thừa
+class SieuNhan:
+    pass
+
+class SieuNhanGao(SieuNhan):
+    pass
+
+gao_do = SieuNhanGao()
+print(gao_do)
+
+- overiding:
+class SieuNhan:
+    suc_manh = 50
+
+class SieuNhanGao(SieuNhan):
+    suc_manh = 40
+
+gao_do = SieuNhanGao()
+print(gao_do.suc_manh)
+
+- Kế thừa hàm tạo:
+class SieuNhan:
+    suc_manh = 50
+    def __init__(self, para_ten, para_vu_khi, para_mau_sac):
+        self.ten = para_ten
+        self.vu_khi = para_vu_khi
+        self.mau_sac = para_mau_sac
+
+class SieuNhanGao(SieuNhan):
+    suc_manh = 40
+    def __init__(self, para_ten, para_vu_khi, para_mau_sac, para_su_thu):
+        # doi luc nguoi ta cung co the
+        # SieuNhan.__init__(para_ten, para_vu_khi, para_mau_sac)
+        # nhung dung super van la chu yeu
+        super().__init__(para_ten, para_vu_khi, para_mau_sac)
+        self.su_thu = para_su_thu
+
+gao_do = SieuNhanGao("Gao do", "Cung", "Do", "Su tu")
+print(gao_do.__dict__)
+print(gao_do.suc_manh)
+
+Lưu ý: Đây là cách dùng cho hàm super cho Python 3.X, với Python 2.X sẽ có một chút khác biệt.
+ Với ví dụ trên nếu là Python 2 thì bạn sẽ gọi hàm super như sau:
+super(SieuNhanGao, self).__init__(para_ten, para_vu_khi, para_mau_sac)
+
+5.Phương thức đặc biệt
+Phương thức đặc biệt, tiếng Anh là Special method, đôi lúc người ta còn gọi là Magic method hoặc Dunder method.
+Định dạng chung của các phức thức này là __tên phương thức __.
+VD: Tạp toán tử:
+def __add__(self, mot_sieu_nhan_khac):
+    return self.suc_manh + mot_sieu_nhan_khac.suc_manh
+print(SN_A + SN_B)
+print(SieuNhan.__add__(SN_A, SN_B))
+
+6.Setters, Getters và Deleters
+- Getter:
+Biến phương thức thành thuộc tính:
+VD:
+@property
+def email(self):
+    return self.ho + '-' + self.ten + '@kteam.com'
+@property
+def ho_va_ten(self):
+    return '{} {}'.format(self.ho, self.ten)
+Giờ đây, ta đã có hai thuộc tính là email và ho_va_ten khong can ().
+print(kter_A.ho)
+print(kter_A.ten)
+print(kter_A.email) # thuoc tinh nen khong can () nhu luc nay
+print(kter_A.ho_va_ten)
+
+- Setter:
+Tuy nhiên khi gán lại thì 2 thuộc tính email và ho_va_ten không đổi do bản chất là phương thức
+Do đó ta cần phương thức setter
+class Kter:
+    def __init__(self, ho, ten):
+        self.ho = ho
+        self.ten = ten
+    @property
+    def email(self):
+        return self.ho + '-' + self.ten + '@kteam.com'
+    @property
+    def ho_va_ten(self):
+        return '{} {}'.format(self.ho, self.ten)
+    @ho_va_ten.setter
+    def ho_va_ten(self, ten_moi):
+        ho_moi, ten_moi = ten_moi.split(' ')
+        self.ho = ho_moi
+        self.ten = ten_moi
+
+kter_A = Kter("Tran", "Long")
+kter_A.ho_va_ten = "Nguyen Giau" # day la argument cho parameter ten_moi
+print(kter_A.ho_va_ten)
+
+- Deleter:
+Nếu bạn muốn dùng xong xóa, thì deleter là công cụ giúp bạn xóa những thuộc tính bạn vừa gán. 
+Xóa ở đây là việc gán một giá trị rác (giá trị không có ý nghĩa) cho cái chúng ta muốn xóa. 
+Và thường trong Python giá trị đó được sử dụng là None (đôi lúc là 0, hoặc là một list rỗng, tùy từng thuộc tính mà ta muốn xóa)
+Cú pháp gần như tương tự với setter (deleter không sử dụng parameter nào khác ngoài parameter self).
+Ta thêm một deleter vào một lớp và sử dụng deleter như sau:
+ class Kter:
+    def __init__(self, ho, ten):
+        self.ho = ho
+        self.ten = ten
+    @property
+    def email(self):
+        return self.ho + '-' + self.ten + '@kteam.com'
+    @property
+    def ho_va_ten(self):
+        return '{} {}'.format(self.ho, self.ten)
+    @ho_va_ten.setter
+    def ho_va_ten(self, ten_moi):
+        ho_moi, ten_moi = ten_moi.split(' ')
+        self.ho = ho_moi
+        self.ten = ten_moi
+    @ho_va_ten.deleter
+    def ho_va_ten(self):
+        self.ho = None
+        self.ten = None
+        print('Da xoa')
+
+kter_A = Kter("Tran", "Long")
+kter_A.ho_va_ten = "Nguyen Giau"
+print(kter_A.ho_va_ten)
+del kter_A.ho_va_ten
+print(kter_A.ho)
+print(kter_A.ten)
